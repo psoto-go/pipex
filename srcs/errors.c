@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 12:58:51 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/16 17:13:17 by psoto-go         ###   ########.fr       */
+/*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
+/*   Updated: 2022/02/16 17:14:41 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../includes/pipex.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdarg.h>
-# include <limits.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include "../libft/libft.h"
-#include <errno.h>
-
-typedef struct pipex
+void	a(void)
 {
-	char *path;
-	char **path_split;
-} t_pipex;
+	system("leaks pipex");
+}
 
-
-void	parser(int argc, char **argv);
-
-void	ft_error(int num);
-
-#endif
+void	ft_error(int num)
+{
+	if (num == 1)
+		ft_printf("%s", "Numero de argumentos invalido");
+	else if (num == 2)
+		perror("No ha sido posible abrir el archivo");
+	else if (num == 3)
+		perror("Error de lectura");
+	else if (num == 4)
+		perror("Error con el path");
+	// atexit(a);
+	exit(0);
+}

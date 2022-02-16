@@ -6,11 +6,11 @@
 #    By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 16:57:12 by psoto-go          #+#    #+#              #
-#    Updated: 2022/02/15 13:02:04 by psoto-go         ###   ########.fr        #
+#    Updated: 2022/02/16 12:41:51 by psoto-go         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			=	srcs/main.c
+SRCS			=	srcs/main.c srcs/parser.c srcs/errors.c
 
 OBJS			= $(SRCS:.c=.o)
 
