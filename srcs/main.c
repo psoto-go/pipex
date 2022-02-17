@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/17 15:17:44 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/17 17:40:58 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,15 @@ int	main(int argc, char **argv, char **envp)
 	t_pipex	pipex;
 
 	inicialize(&pipex);
-	parser(argc, argv, &pipex);
+	// parser(argc, argv, &pipex);
+	argc = 0;
 	get_path(envp, &pipex);
 	split_comand(&pipex, argv);
 	correct_path(&pipex);
+	execve(pipex.path_comand, pipex.comand, &pipex.path);
 	split_comand(&pipex, argv);
 	correct_path(&pipex);
-	forks_settings(&pipex);
+	execve(pipex.path_comand, pipex.comand, &pipex.path);
+	// forks_settings(&pipex);
 	ft_error(0, &pipex);
 }
