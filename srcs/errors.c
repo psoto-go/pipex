@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/16 20:57:10 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/17 11:37:28 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ void	ft_error(int num, t_pipex *pipex)
 		perror("Error de lectura");
 	else if (num == 4)
 		perror("Error con el path");
+	else if (num == 5)
+		perror("Comando no encontrado");
 	ft_exit(pipex);
 }
