@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/17 11:45:26 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/17 13:00:54 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	split_comand(t_pipex *pipex, char **argv)
 {
+	if (pipex->path_comand)
+		free(pipex->path_comand);
 	if (!pipex->comand)
 		pipex->comand = ft_split(argv[2], ' ');
 	else if (pipex->comand)
@@ -34,14 +36,13 @@ void	correct_path(t_pipex *pipex)
 	flag = 0;
 	while (pipex->path_split[i])
 	{
-		uno = ft_strjoin_leaks(pipex->path_split[i], "/");
-		dos = ft_strjoin_leaks(uno, pipex->comand[0]);
+		uno = ft_strjoinlks(pipex->path_split[i], "/");
+		dos = ft_strjoin(uno, pipex->comand[0]);
 		if (access(dos, F_OK) == 0)
 		{
 			pipex->path_comand = ft_strdup(dos);
 			flag = 1;
 		}
-		free(uno);
 		free(dos);
 		i++;
 	}
@@ -94,5 +95,10 @@ int	main(int argc, char **argv, char **envp)
 	correct_path(&pipex);
 	split_comand(&pipex, argv);
 	correct_path(&pipex);
+		split_comand(&pipex, argv);
+	correct_path(&pipex);
+		split_comand(&pipex, argv);
+	correct_path(&pipex);
+	
 	ft_error(0, &pipex);
 }

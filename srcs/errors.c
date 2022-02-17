@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/17 11:37:28 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:57:13 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	ft_exit(t_pipex *pipex)
 		free(pipex->path);
 	if (pipex->path_split)
 		free_split_path(pipex);
-	if (pipex->path_comand)
-		free(pipex->path_comand);
 	if (pipex->comand)
 		free_comand(pipex);
+	if (pipex->path_comand)
+		free(pipex->path_comand);
 	// atexit(a);
 	exit(0);
 }
