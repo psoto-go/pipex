@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/17 13:51:27 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/17 15:17:44 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	split_comand(t_pipex *pipex, char **argv)
 		free_comand(pipex);
 		pipex->comand = ft_split(argv[3], ' ');
 	}
-	
 }
 
 void	correct_path(t_pipex *pipex)
@@ -30,7 +29,7 @@ void	correct_path(t_pipex *pipex)
 	char	*dos;
 	int		i;
 	int		flag;
-	
+
 	i = 0;
 	flag = 0;
 	while (pipex->path_split[i])
@@ -49,7 +48,6 @@ void	correct_path(t_pipex *pipex)
 	}
 	if (flag == 0)
 		ft_error(5, pipex);
-
 }
 
 void	split_path(t_pipex *pipex)
@@ -86,15 +84,45 @@ void	get_path(char **envp, t_pipex *pipex)
 		ft_error(4, pipex);
 }
 
+void	fork_son(t_pipex *pipex)
+{
+	close(pipex->fd[READ_END]);
+	dup2(pipex->fd[WRITE_END], STDOUT_FILENO);
+	close(pipex->fd[WRITE_END]);
+	printf("sa");
+}
+
+void	forks_settings(t_pipex *pipex)
+{
+	pid_t pid;
+	
+	pipe(pipex->fd);
+	// printf("%d\n", getpid());
+	pid = fork();
+	// printf("%d\n", pid);
+	if (pid == 0)
+		fork_son(pipex);
+}
+
+void	inicialize(t_pipex *pipex)
+{
+	pipex->comand = NULL;
+	pipex->path = NULL;
+	pipex->path_split = NULL;
+	pipex->path_comand = NULL;
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
 
+	inicialize(&pipex);
 	parser(argc, argv, &pipex);
 	get_path(envp, &pipex);
 	split_comand(&pipex, argv);
 	correct_path(&pipex);
 	split_comand(&pipex, argv);
 	correct_path(&pipex);
+	forks_settings(&pipex);
 	ft_error(0, &pipex);
 }

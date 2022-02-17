@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/17 13:51:42 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/17 15:17:36 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	free_comand(t_pipex *pipex)
 	free(pipex->comand);
 }
 
-
 void	free_split_path(t_pipex *pipex)
 {
 	int	i;
@@ -46,22 +45,22 @@ void	free_split_path(t_pipex *pipex)
 
 void	ft_exit(t_pipex *pipex)
 {
-	if (pipex->path)
-		free(pipex->path);
-	if (pipex->path_split)
-		free_split_path(pipex);
 	if (pipex->comand)
 		free_comand(pipex);
+	if (pipex->path_split)
+		free_split_path(pipex);
+	if (pipex->path)
+		free(pipex->path);
 	if (pipex->path_comand)
 		free(pipex->path_comand);
-	atexit(a);
+	// atexit(a);
 	exit(0);
 }
 
 void	ft_error(int num, t_pipex *pipex)
 {
 	if (num == 1)
-		ft_printf("%s", "Numero de argumentos invalido");
+		ft_printf("%s", "Numero de argumentos invalido\n");
 	else if (num == 2)
 		perror("No ha sido posible abrir el archivo");
 	else if (num == 3)
