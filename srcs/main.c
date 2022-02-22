@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/22 17:31:24 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:21:12 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,17 @@
 void	split_comand(t_pipex *pipex, char **argv, int flag)
 {	
 	if (flag == 0)
+	{
+		if (pipex->comand)
+			free_comand(pipex);
 		pipex->comand = ft_split(argv[2], ' ');
+	}
 	else if (flag == 1)
+	{
+		if (pipex->comand)
+			free_comand(pipex);
 		pipex->comand = ft_split(argv[3], ' ');
+	}
 }
 
 void	correct_path(t_pipex *pipex)
@@ -92,7 +100,6 @@ void	fork_son(t_pipex *pipex, char **envp, int fd, char **argv)
 	correct_path(pipex);
 	if (execve(pipex->path_comand, pipex->comand, envp) == -1)
 		ft_error(6, pipex);
-	// execve(pipex->path_comand, pipex->comand, envp);
 }
 
 void	fork_son2(t_pipex *pipex, char **envp, int fd2, char **argv)
@@ -106,7 +113,6 @@ void	fork_son2(t_pipex *pipex, char **envp, int fd2, char **argv)
 	correct_path(pipex);
 	if (execve(pipex->path_comand, pipex->comand, envp) == -1)
 		ft_error(6, pipex);
-	// execve(pipex->path_comand, pipex->comand, envp);
 }
 
 void	forks_settings(t_pipex *p, char **envp, char **argv, int fd1, int fd2)
@@ -117,14 +123,12 @@ void	forks_settings(t_pipex *p, char **envp, char **argv, int fd1, int fd2)
 	
 	pipe(p->fd);
 	pid1 = fork();
-	// printf("%d\n", pid1);
 	if (pid1 < 0)
         return (perror("Fork: "));
 	if (pid1 == 0)
 		fork_son(p, envp, fd1, argv);
 	waitpid(pid1, &status, 0);
 	pid2 = fork();
-	// printf("%d", pid2);
 	if (pid2 < 0)
         return (perror("Fork: "));
 	if (pid2 == 0)
@@ -132,6 +136,14 @@ void	forks_settings(t_pipex *p, char **envp, char **argv, int fd1, int fd2)
 	close(p->fd[WRITE_END]);
 	close(p->fd[READ_END]);
 	waitpid(pid2, &status, 0);
+}
+
+void	check_commands(t_pipex *pipex, char **argv)
+{
+	split_comand(pipex, argv, 0);
+	correct_path(pipex);
+	split_comand(pipex, argv, 1);
+	correct_path(pipex);
 }
 
 void	open_files(t_pipex *pipex, char **envp, char **argv)
@@ -159,8 +171,7 @@ int	main(int argc, char **argv, char **envp)
 	inicialize(&pipex);
 	parser(argc, argv, &pipex);
 	get_path(envp, &pipex);
+	check_commands(&pipex, argv);
 	open_files(&pipex, envp, argv);
 	ft_error(0, &pipex);
 }
-
-	// execve(pipex.path_comand, pipex.comand, envp);

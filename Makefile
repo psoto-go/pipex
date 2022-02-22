@@ -6,7 +6,7 @@
 #    By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 16:57:12 by psoto-go          #+#    #+#              #
-#    Updated: 2022/02/18 11:00:30 by psoto-go         ###   ########.fr        #
+#    Updated: 2022/02/22 17:55:25 by psoto-go         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ BONUS_OBJS		= $(BONUS:.c=.o)
 CC				= gcc
 RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror
+CFLAGSANI		= -Wall -Wextra -Werror -fsanitize=address -g3
 MAKE			= make
 LIBFT			= libft
 NAME			= pipex
@@ -30,6 +31,11 @@ all:			$(NAME)
 $(NAME):		$(OBJS)
 				$(MAKE) all -C $(LIBFT)
 				$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME)
+
+
+sani:			$(OBJS)
+				$(MAKE) all -C $(LIBFT)
+				$(CC) $(CFLAGSANI) $(OBJS) libft/libft.a -o $(NAME)
 
 
 clean:
@@ -48,4 +54,4 @@ bonus:			$(BONUS_OBJS)
 				$(MAKE) all -C $(LIBFT)
 				$(CC) $(CFLAGS) $(BONUS_OBJS) libft/libft.a -o $(NAME)
 
-.PHONY:			all clean fclean re bonus
+.PHONY:			all clean fclean re bonus sani
