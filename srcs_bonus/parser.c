@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:48:37 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/22 18:30:44 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/18 13:48:48 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,8 @@ void	check_file(char **argv, t_pipex *pipex)
 	int	fd2;
 
 	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		if (errno == 2)
-			ft_error(2, pipex);
-		else
-			ft_error(3, pipex);
-	}
 	fd2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0666);
-	if (fd2 == -1)
+	if (fd == -1 || fd2 == -1)
 	{
 		if (errno == 2)
 			ft_error(2, pipex);
@@ -43,10 +36,8 @@ void	check_file(char **argv, t_pipex *pipex)
 	close(fd2);
 }
 
-void	parser(int argc, char **argv, t_pipex *pipex, char **envp)
+void	parser(int argc, char **argv, t_pipex *pipex)
 {
 	num_args(argc, pipex);
 	check_file(argv, pipex);
-	get_path(envp, pipex);
-	check_commands(pipex, argv);
 }
