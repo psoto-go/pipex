@@ -6,38 +6,11 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:32:13 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/22 18:32:56 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:45:29 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-void	correct_path(t_pipex *pipex)
-{
-	char	*uno;
-	char	*dos;
-	int		i;
-	int		flag;
-
-	i = 0;
-	flag = 0;
-	while (pipex->path_split[i])
-	{
-		uno = ft_strjoinlks(pipex->path_split[i], "/");
-		dos = ft_strjoin(uno, pipex->comand[0]);
-		if (access(dos, F_OK) == 0)
-		{
-			if (pipex->path_comand)
-				free(pipex->path_comand);
-			pipex->path_comand = ft_strdup(dos);
-			flag = 1;
-		}
-		free(dos);
-		i++;
-	}
-	if (flag == 0)
-		ft_error(5, pipex);
-}
 
 void	split_path(t_pipex *pipex)
 {
@@ -48,7 +21,25 @@ void	split_path(t_pipex *pipex)
 		ft_error(4, pipex);
 }
 
-void	get_path(char **envp, t_pipex *pipex)
+void	put_path_command(t_pipex *pipex, char **argv)
+{
+	char	*uno;
+
+	if (argv[2][0] == '/' && argv[3][0] != '/')
+		pipex->path = ft_strdup(argv[2]);
+	else if (argv[2][0] == '/' && argv[3][0] == '/')
+	{
+		uno = ft_strjoinlks(argv[2], ":");
+		pipex->path = ft_strjoin(uno, argv[3]);
+	}
+	else if (argv[2][0] != '/' && argv[3][0] == '/')
+		pipex->path = ft_strdup(argv[3]);
+	else
+		ft_error(4, pipex);
+	split_path(pipex);
+}
+
+void	get_path(char **envp, t_pipex *pipex, char **argv)
 {
 	int		i;
 	int		flag;
@@ -56,7 +47,7 @@ void	get_path(char **envp, t_pipex *pipex)
 
 	i = 0;
 	flag = 0;
-	while ((envp[i] != (void *)0) && flag == 0)
+	while ((envp[i] != '\0') && flag == 0)
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 		{
@@ -69,6 +60,6 @@ void	get_path(char **envp, t_pipex *pipex)
 	}
 	if (flag == 1)
 		split_path(pipex);
-	else
-		ft_error(4, pipex);
+	else if (flag == 0)
+		put_path_command(pipex, argv);
 }

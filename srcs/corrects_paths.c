@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
+/*   corrects_paths.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 18:32:13 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/22 18:32:56 by psoto-go         ###   ########.fr       */
+/*   Created: 2022/02/23 16:45:01 by psoto-go          #+#    #+#             */
+/*   Updated: 2022/02/23 19:17:32 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,36 +39,42 @@ void	correct_path(t_pipex *pipex)
 		ft_error(5, pipex);
 }
 
-void	split_path(t_pipex *pipex)
-{
-	if (!pipex->path)
-		ft_error(4, pipex);
-	pipex->path_split = ft_split(pipex->path, ':');
-	if (!pipex->path_split)
-		ft_error(4, pipex);
-}
-
-void	get_path(char **envp, t_pipex *pipex)
+void	correct_path_slash(t_pipex *pipex)
 {
 	int		i;
 	int		flag;
-	char	*subst;
 
 	i = 0;
 	flag = 0;
-	while ((envp[i] != (void *)0) && flag == 0)
+	if (access(pipex->comand[0], F_OK) == 0)
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		if (pipex->path_comand)
+			free(pipex->path_comand);
+		pipex->path_comand = ft_strdup(pipex->comand[0]);
+		flag = 1;
+	}
+	if (flag == 0)
+		ft_error(5, pipex);
+}
+
+void	check_slash(t_pipex *pipex)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	while (pipex->comand[0][i])
+	{
+		if (pipex->comand[0][i] == '/')
 		{
-			subst = ft_substr(envp[i], 5, ft_strlen(envp[i]));
-			pipex->path = ft_strdup(subst);
-			free(subst);
 			flag = 1;
+			break ;
 		}
 		i++;
 	}
+	if (flag == 0)
+		correct_path(pipex);
 	if (flag == 1)
-		split_path(pipex);
-	else
-		ft_error(4, pipex);
+		correct_path_slash(pipex);
 }
