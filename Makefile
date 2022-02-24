@@ -6,12 +6,12 @@
 #    By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 16:57:12 by psoto-go          #+#    #+#              #
-#    Updated: 2022/02/24 10:14:33 by psoto-go         ###   ########.fr        #
+#    Updated: 2022/02/24 10:43:12 by psoto-go         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS			=	srcs/main.c srcs/parser.c srcs/errors.c srcs/path.c \
-					srcs/comands.c srcs/corrects_paths.c
+					srcs/comands.c srcs/corrects_paths.c srcs/utils.c
 
 OBJS			= $(SRCS:.c=.o)
 
