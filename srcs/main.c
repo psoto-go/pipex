@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/23 17:19:24 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 10:02:03 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	forks_settings(t_pipex *p, char **envp, char **argv)
 	int		fd2;
 
 	fd1 = open(argv[1], O_RDONLY);
-	fd2 = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0777);
+	fd2 = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	pipe(p->fd);
 	pid1 = fork();
 	if (pid1 < 0)
