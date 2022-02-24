@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 16:14:54 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 19:29:15 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,27 @@ void	forks_settings(t_pipex *p, char **envp, char **argv)
 {
 	int		fd1;
 	int		fd2;
+	int		i;
+	pid_t	pid;
+	int		status;
 
 	fd1 = open(argv[1], O_RDONLY);
 	fd2 = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	pipe(p->fd);
+	i = 0;
+	pid = 0;
+	while (i < ft_lstsize(p->list) && waitpid(pid, &status, 0))
+	{
+		pipe(p->fd);
+		pid = fork();
+		if (pid < 0)
+			return (perror("Fork: "));
+		if (pid == 0)
+			printf("%d\n", pid);
+		i++;
+	}
+	envp = 0;
+	// close(fd1);
+	// close(fd2);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -84,9 +101,13 @@ int	main(int argc, char **argv, char **envp)
 	inicialize(&pipex);
 	parser(argc, argv, &pipex, envp);
 	ft_printlst(&pipex);
-	// forks_settings(&pipex, envp, argv);
+	forks_settings(&pipex, envp, argv);
 	// // while(42);
 	// ft_lstiter(pipex.list, free);
+	while (1)
+	{
+		
+	}
 	ft_error(0, &pipex);
 }
 
