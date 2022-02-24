@@ -6,11 +6,16 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 10:15:43 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 10:02:00 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
+
+void	a(void)
+{
+	system("leaks pipex");
+}
 
 void	free_comand(t_pipex *pipex)
 {
@@ -48,6 +53,9 @@ void	ft_exit(t_pipex *pipex)
 		free(pipex->path);
 	if (pipex->path_comand)
 		free(pipex->path_comand);
+	close(pipex->fd[WRITE_END]);
+	close(pipex->fd[READ_END]);
+	// atexit(a);
 	exit(0);
 }
 

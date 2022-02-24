@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 10:16:51 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 10:02:03 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int	main(int argc, char **argv, char **envp)
 	inicialize(&pipex);
 	parser(argc, argv, &pipex, envp);
 	forks_settings(&pipex, envp, argv);
+	// while(42);
 	ft_error(0, &pipex);
 }
