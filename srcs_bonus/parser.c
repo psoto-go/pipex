@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:48:37 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 16:12:27 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:34:43 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	num_args(int argc, t_pipex *pipex)
 {
-	if (argc != 5)
+	if (argc < 6)
 		ft_error(1, pipex);
 }
 
@@ -58,7 +58,7 @@ void	fill_stack(int argc, char **argv, t_pipex *p)
 
 void	parser(int argc, char **argv, t_pipex *pipex, char **envp)
 {
-	// num_args(argc, pipex);
+	num_args(argc, pipex);
 	check_file(argv, pipex, argc);
 	get_path(envp, pipex, argv);
 	fill_stack(argc, argv, pipex);
