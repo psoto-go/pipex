@@ -6,7 +6,7 @@
 #    By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 16:57:12 by psoto-go          #+#    #+#              #
-#    Updated: 2022/02/24 11:03:15 by psoto-go         ###   ########.fr        #
+#    Updated: 2022/02/24 11:32:28 by psoto-go         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,10 @@ NAME			= pipex
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-				$(CC) $(CFLAGS) $(NAME) $(OBJS) 
+				$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 sani:			$(OBJS)
-				$(CC) $(CFLAGSANI) $(NAME) $(OBJS) 
+				$(CC) $(CFLAGSANI) $(OBJS) -o $(NAME)
 
 clean:
 				$(RM) $(OBJS) $(BONUS_OBJS)
@@ -48,6 +48,6 @@ fclean:			clean
 re:				fclean $(NAME)
 
 bonus:			$(BONUS_OBJS)
-				$(CC) $(CFLAGS) $(NAME) $(BONUS_OBJS)
+				$(CC) $(CFLAGS) $(BONUS_OBJS) -o $(NAME)
 
 .PHONY:			all clean fclean re bonus sani
