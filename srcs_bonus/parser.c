@@ -6,11 +6,11 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:48:37 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 09:54:04 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:05:09 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 void	num_args(int argc, t_pipex *pipex)
 {
@@ -18,7 +18,7 @@ void	num_args(int argc, t_pipex *pipex)
 		ft_error(1, pipex);
 }
 
-void	check_file(char **argv, t_pipex *pipex)
+void	check_file(char **argv, t_pipex *pipex, int argc)
 {
 	int	fd;
 	int	fd2;
@@ -31,7 +31,7 @@ void	check_file(char **argv, t_pipex *pipex)
 		else
 			ft_error(3, pipex);
 	}
-	fd2 = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0666);
+	fd2 = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	if (fd2 < 0)
 	{
 		if (errno == 2)
@@ -43,10 +43,24 @@ void	check_file(char **argv, t_pipex *pipex)
 	close(fd2);
 }
 
+void	fill_stack(int argc, char **argv, t_pipex *p)
+{
+	int i;
+
+	i = 2;
+	while (i <= (argc - 2))
+	{
+		check_only_command(argv[i], p);
+		ft_lstadd_back(&p->list, new_nodo((void *)argv[i], sizeof(char *)));
+		i++;
+	}
+}
+
 void	parser(int argc, char **argv, t_pipex *pipex, char **envp)
 {
-	num_args(argc, pipex);
-	check_file(argv, pipex);
+	// num_args(argc, pipex);
+	check_file(argv, pipex, argc);
 	get_path(envp, pipex, argv);
-	check_commands(pipex, argv);
+	fill_stack(argc, argv, pipex);
+	// check_commands(pipex, argv);
 }

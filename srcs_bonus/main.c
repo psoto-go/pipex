@@ -6,11 +6,11 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 10:02:03 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:58:16 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 void	fork_son(t_pipex *pipex, char **envp, int fd, char **argv)
 {
@@ -73,7 +73,11 @@ int	main(int argc, char **argv, char **envp)
 
 	inicialize(&pipex);
 	parser(argc, argv, &pipex, envp);
-	forks_settings(&pipex, envp, argv);
-	// while(42);
+	ft_printlst(&pipex);
+	pipex.lenlst = ft_lstsize(pipex.list);
+	printf("%d", pipex.lenlst);
+	// forks_settings(&pipex, envp, argv);
+	// // while(42);
+	// ft_lstiter(pipex.list, free);
 	ft_error(0, &pipex);
 }

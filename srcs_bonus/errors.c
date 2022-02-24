@@ -6,11 +6,11 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 10:47:09 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:51:55 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 void	a(void)
 {
@@ -45,6 +45,9 @@ void	free_split_path(t_pipex *pipex)
 
 void	ft_exit(t_pipex *pipex)
 {
+	// ft_printlst(pipex);
+	if (pipex->list)
+		ft_lstclear(&pipex->list, free);
 	if (pipex->comand)
 		free_comand(pipex);
 	if (pipex->path_split)
@@ -55,7 +58,7 @@ void	ft_exit(t_pipex *pipex)
 		free(pipex->path_comand);
 	close(pipex->fd[WRITE_END]);
 	close(pipex->fd[READ_END]);
-	// atexit(a);
+	atexit(a);
 	exit(0);
 }
 
@@ -65,6 +68,8 @@ void	inicialize(t_pipex *pipex)
 	pipex->path = NULL;
 	pipex->path_split = NULL;
 	pipex->path_comand = NULL;
+	pipex->list = NULL;
+	pipex->lenlst = 0;
 }
 
 void	ft_error(int num, t_pipex *pipex)

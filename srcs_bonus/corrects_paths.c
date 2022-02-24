@@ -6,11 +6,11 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:45:01 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/23 19:17:32 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 12:50:52 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 void	correct_path(t_pipex *pipex)
 {
