@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:48:37 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 16:05:09 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:12:27 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,4 @@ void	parser(int argc, char **argv, t_pipex *pipex, char **envp)
 	check_file(argv, pipex, argc);
 	get_path(envp, pipex, argv);
 	fill_stack(argc, argv, pipex);
-	// check_commands(pipex, argv);
 }

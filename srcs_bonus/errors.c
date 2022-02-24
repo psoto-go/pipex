@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 15:51:55 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:13:10 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	inicialize(t_pipex *pipex)
 	pipex->path_split = NULL;
 	pipex->path_comand = NULL;
 	pipex->list = NULL;
-	pipex->lenlst = 0;
+	pipex->lenlst = (int) NULL;
 }
 
 void	ft_error(int num, t_pipex *pipex)
