@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 10:15:43 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/24 10:47:16 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	inicialize(t_pipex *pipex)
 void	ft_error(int num, t_pipex *pipex)
 {
 	if (num == 1)
-		ft_printf("%s", "Numero de argumentos invalido\n");
+		printf("%s", "Numero de argumentos invalido\n");
 	else if (num == 2)
 		perror("No ha sido posible abrir el archivo");
 	else if (num == 3)
