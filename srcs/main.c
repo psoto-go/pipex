@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 10:16:51 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/25 13:49:48 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	fork_son2(t_pipex *pipex, char **envp, int fd2, char **argv)
 void	forks_settings(t_pipex *p, char **envp, char **argv)
 {
 	pid_t	pid1;
-	pid_t	pid2;
 	int		status;
 	int		fd1;
 	int		fd2;
@@ -51,20 +50,19 @@ void	forks_settings(t_pipex *p, char **envp, char **argv)
 	pipe(p->fd);
 	pid1 = fork();
 	if (pid1 < 0)
-		return (perror("Fork: "));
+		ft_error(7, p);
 	if (pid1 == 0)
 		fork_son(p, envp, fd1, argv);
-	waitpid(pid1, &status, 0);
-	pid2 = fork();
-	if (pid2 < 0)
-		return (perror("Fork: "));
-	if (pid2 == 0)
+	pid1 = fork();
+	if (pid1 < 0)
+		ft_error(7, p);
+	if (pid1 == 0)
 		fork_son2(p, envp, fd2, argv);
 	close(p->fd[WRITE_END]);
 	close(p->fd[READ_END]);
 	close(fd1);
 	close(fd2);
-	waitpid(pid2, &status, 0);
+	waitpid(pid1, &status, 0);
 }
 
 int	main(int argc, char **argv, char **envp)

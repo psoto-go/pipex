@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 10:47:16 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/25 10:07:29 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	ft_error(int num, t_pipex *pipex)
 	else if (num == 5)
 		perror("Comando no encontrado");
 	else if (num == 6)
-		perror("Execve");
+		perror("Error execve");
+	else if (num == 7)
+		perror("Error de fork");
 	ft_exit(pipex);
 }
