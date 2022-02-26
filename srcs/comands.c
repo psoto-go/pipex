@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:36:55 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 10:16:38 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/26 11:27:01 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	split_comand(t_pipex *pipex, char **argv, int flag)
 {
 	if (flag == 0)
 	{
-		if (!argv[2][0])
+		if (!argv[2][0] || (ft_isalpha(argv[2][0]) == 0))
 			ft_error(5, pipex);
 		if (pipex->comand)
 			free_comand(pipex);
@@ -24,7 +24,7 @@ void	split_comand(t_pipex *pipex, char **argv, int flag)
 	}
 	if (flag == 1)
 	{
-		if (!argv[3][0])
+		if (!argv[3][0] || (ft_isalpha(argv[3][0]) == 0))
 			ft_error(5, pipex);
 		if (pipex->comand)
 			free_comand(pipex);

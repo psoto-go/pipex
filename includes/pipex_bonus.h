@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:58:51 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 15:54:46 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/26 12:20:12 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	correct_path_slash(t_pipex *pipex);
 
 void	split_path(t_pipex *pipex);
 
-void	split_comand(t_pipex *pipex, char **argv, int flag);
+void	split_comand(t_pipex *pipex, t_pipex aux);
 
 void	inicialize(t_pipex *pipex);
 
@@ -99,5 +99,7 @@ void	check_only_command(char *argv, t_pipex *pipex);
 t_list	*new_nodo(void *str, size_t size);
 
 int		ft_lstsize(t_list *lst);
+
+int		ft_isalpha(int c);
 
 #endif

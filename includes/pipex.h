@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:58:51 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 11:00:41 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/26 11:13:47 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *s);
 
 void	*ft_memcpy(void *str1, const void *str2, size_t n);
+
+int		ft_isalpha(int c);
 
 #endif

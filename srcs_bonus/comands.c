@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:36:55 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 15:47:44 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/26 12:48:27 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,18 @@ void		check_only_command(char *argv, t_pipex *pipex)
 	check_slash(pipex);
 }
 
-void	split_comand(t_pipex *pipex, char **argv, int flag)
+void	split_comand(t_pipex *pipex, t_pipex aux)
 {
-	if (flag == 0)
-	{
-		if (!argv[2][0])
-			ft_error(5, pipex);
-		if (pipex->comand)
-			free_comand(pipex);
-		pipex->comand = ft_split(argv[2], ' ');
-		
-	}
-	if (flag == 1)
-	{
-		if (!argv[3][0])
-			ft_error(5, pipex);
-		if (pipex->comand)
-			free_comand(pipex);
-		pipex->comand = ft_split(argv[3], ' ');
-	}
+	if (pipex->comand)
+		free_comand(pipex);
+	pipex->comand = ft_split(aux.list->content, ' ');
+	// printf("%s\n", *pipex->comand);
 }
 
-void	check_commands(t_pipex *pipex, char **argv)
-{
-	split_comand(pipex, argv, 0);
-	check_slash(pipex);
-	split_comand(pipex, argv, 1);
-	check_slash(pipex);
-}
+// void	check_commands(t_pipex *pipex, char **argv)
+// {
+// 	split_comand(pipex, argv, 0);
+// 	check_slash(pipex);
+// 	split_comand(pipex, argv, 1);
+// 	check_slash(pipex);
+// }

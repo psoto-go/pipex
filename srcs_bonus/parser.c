@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:48:37 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/24 18:34:43 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/26 11:28:33 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	fill_stack(int argc, char **argv, t_pipex *p)
 	i = 2;
 	while (i <= (argc - 2))
 	{
+		if (ft_isalpha(argv[i][0]) == 0)
+			ft_error(5, p);
 		check_only_command(argv[i], p);
 		ft_lstadd_back(&p->list, new_nodo((void *)argv[i], sizeof(char *)));
 		i++;
