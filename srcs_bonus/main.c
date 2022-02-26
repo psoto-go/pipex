@@ -6,13 +6,13 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/26 13:19:07 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/26 14:05:27 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-t_pipex		get_nodo(t_pipex *pipex, int i)
+t_pipex	get_nodo(t_pipex *pipex, int i)
 {
 	t_pipex	aux;
 	int		j;
@@ -34,6 +34,8 @@ void	do_childs(t_pipex *pipex, int i, char **envp)
 
 	pipe(pipex->fd);
 	pid = fork();
+	if (pid < 0)
+		ft_error(7, pipex);
 	if (pid > 0)
 	{
 		close(pipex->fd[WRITE_END]);
@@ -74,6 +76,10 @@ void	forks_settings(t_pipex *p, char **envp, char **argv, int argc)
 		ft_error(6, p);
 	close(fd1);
 	close(fd2);
+	// p = 0;
+	// argv = 0; 
+	// argc = 0;
+	// envp = 0;
 }
 
 int	main(int argc, char **argv, char **envp)

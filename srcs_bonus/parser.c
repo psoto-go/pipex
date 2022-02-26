@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:48:37 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/26 13:21:09 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/26 13:36:35 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	check_file(char **argv, t_pipex *pipex, int argc)
 
 void	fill_stack(int argc, char **argv, t_pipex *p)
 {
-	int i;
+	int	i;
 
 	i = 2;
 	while (i <= (argc - 2))

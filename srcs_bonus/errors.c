@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/26 13:14:43 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/26 14:08:49 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	free_split_path(t_pipex *pipex)
 
 void	ft_exit(t_pipex *pipex)
 {
-	// ft_printlst(pipex);
 	if (pipex->list)
 		ft_lstclear(&pipex->list, free);
 	if (pipex->comand)
@@ -83,10 +82,10 @@ void	ft_error(int num, t_pipex *pipex)
 	else if (num == 4)
 		perror("Error con el path");
 	else if (num == 5)
-		perror("Comando no encontradoaaa");
-	else if (num == 7)
-		perror("Comando no encontradobbb");
+		perror("Comando no encontrado");
 	else if (num == 6)
-		perror("Execve");
+		perror("Error execve");
+	else if (num == 7)
+		perror("Error de fork");
 	ft_exit(pipex);
 }
