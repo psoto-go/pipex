@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:45:01 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/26 11:21:27 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/26 13:22:53 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	correct_path_slash(t_pipex *pipex)
 		flag = 1;
 	}
 	if (flag == 0)
-		ft_error(5, pipex);
+		ft_error(7, pipex);
 }
 
 void	check_slash(t_pipex *pipex)
