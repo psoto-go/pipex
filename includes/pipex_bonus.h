@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:58:51 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/28 13:39:17 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:29:26 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <errno.h>
 # define READ_END 0
 # define WRITE_END 1
+# define BUFFER_SIZE 1
 
 typedef struct list
 {
@@ -101,5 +102,7 @@ t_list	*new_nodo(void *str, size_t size);
 int		ft_lstsize(t_list *lst);
 
 int		ft_isalpha(int c);
+
+char	*get_next_line(int fd);
 
 #endif

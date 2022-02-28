@@ -6,7 +6,7 @@
 #    By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 16:57:12 by psoto-go          #+#    #+#              #
-#    Updated: 2022/02/26 13:22:01 by psoto-go         ###   ########.fr        #
+#    Updated: 2022/02/28 18:24:30 by psoto-go         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ BONUS			=	srcs_bonus/main.c srcs_bonus/parser.c srcs_bonus/errors.c srcs_bonus/p
 					utils_bonus/ft_strjoinlks.c utils_bonus/ft_strlen.c utils_bonus/ft_strncmp.c \
 					utils_bonus/ft_substr.c utils_bonus/ft_lstadd_back.c utils_bonus/ft_lstclear.c \
 					utils_bonus/ft_lstlast.c utils_bonus/ft_lstdelone.c utils_bonus/ft_lstiter.c \
-					utils_bonus/ft_memcpy.c utils_bonus/ft_lstsize.c utils_bonus/ft_isalpha.c
+					utils_bonus/ft_memcpy.c utils_bonus/ft_lstsize.c utils_bonus/ft_isalpha.c \
+					utils_bonus/get_next_line.c
 
 BONUS_OBJS		= $(BONUS:.c=.o)
 
