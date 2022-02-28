@@ -6,16 +6,11 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/26 14:08:49 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/28 13:50:35 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
-
-void	a(void)
-{
-	system("leaks pipex");
-}
 
 void	free_comand(t_pipex *pipex)
 {
@@ -57,7 +52,6 @@ void	ft_exit(t_pipex *pipex)
 		free(pipex->path_comand);
 	close(pipex->fd[WRITE_END]);
 	close(pipex->fd[READ_END]);
-	// atexit(a);
 	exit(0);
 }
 
@@ -68,7 +62,6 @@ void	inicialize(t_pipex *pipex)
 	pipex->path_split = NULL;
 	pipex->path_comand = NULL;
 	pipex->list = NULL;
-	pipex->lenlst = (int) NULL;
 }
 
 void	ft_error(int num, t_pipex *pipex)
@@ -87,5 +80,7 @@ void	ft_error(int num, t_pipex *pipex)
 		perror("Error execve");
 	else if (num == 7)
 		perror("Error de fork");
+	else if (num == 8)
+		perror("Error de pipe");
 	ft_exit(pipex);
 }

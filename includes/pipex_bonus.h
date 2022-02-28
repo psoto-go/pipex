@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:58:51 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/26 12:20:12 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/02/28 13:39:17 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct pipex
 	char	*path_comand;
 	char	**comand;
 	int		fd[2];
+	int		bcstd[2];
 	t_list	*list;
-	int		lenlst;
 }	t_pipex;
 
 void	parser(int argc, char **argv, t_pipex *pipex, char **envp);
