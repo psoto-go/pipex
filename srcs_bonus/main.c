@@ -6,30 +6,15 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/03/01 13:37:06 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/03/01 16:53:05 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-t_pipex	get_nodo(t_pipex *pipex, int i)
-{
-	t_pipex	aux;
-	int		j;
-
-	aux = *pipex;
-	j = 0;
-	while (j < i)
-	{
-		aux.list = aux.list->next;
-		j++;
-	}
-	return (aux);
-}
-
 void	check_here_doc(t_pipex *pipex, char *argv)
 {
-	char *line;
+	char	*line;
 
 	close(pipex->fd[READ_END]);
 	write(STDOUT_FILENO, "> ", 2);
@@ -59,6 +44,7 @@ void	do_childs_here(t_pipex *pipex, char *argv)
 	if (pipe(pipex->fd) == -1)
 		ft_error(8, pipex);
 	pid = fork();
+	system("leaks pipex");
 	if (pid < 0)
 		ft_error(7, pipex);
 	if (pid > 0)
@@ -71,7 +57,6 @@ void	do_childs_here(t_pipex *pipex, char *argv)
 	else
 		check_here_doc(pipex, argv);
 }
-
 
 void	do_childs(t_pipex *pipex, int i, char **envp)
 {
@@ -102,12 +87,6 @@ void	do_childs(t_pipex *pipex, int i, char **envp)
 	}
 }
 
-void	do_backups(t_pipex *p)
-{
-	p->bcstd[0] = dup(STDIN_FILENO);
-	p->bcstd[1] = dup(STDOUT_FILENO);
-}
-
 void	forks_settings(t_pipex *p, char **envp, char **argv)
 {
 	int		i;
@@ -126,14 +105,12 @@ void	forks_settings(t_pipex *p, char **envp, char **argv)
 	split_comand(p, get_nodo(p, i - 1));
 	check_slash(p);
 	dup2(p->fdstd[1], STDOUT_FILENO);
-	close(p->fdstd[0]);
 	close(p->fdstd[1]);
 	if (execve(p->path_comand, p->comand, envp) == -1)
 		ft_error(6, p);
+	close(p->fdstd[0]);
 	dup2(p->bcstd[0], STDIN_FILENO);
 	dup2(p->bcstd[1], STDOUT_FILENO);
-	close(p->bcstd[WRITE_END]);
-	close(p->bcstd[READ_END]);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -142,7 +119,6 @@ int	main(int argc, char **argv, char **envp)
 
 	inicialize(&pipex);
 	parser(argc, argv, &pipex, envp);
-	// ft_printlst(&pipex);
 	forks_settings(&pipex, envp, argv);
 	ft_error(0, &pipex);
 }

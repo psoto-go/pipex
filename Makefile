@@ -6,7 +6,7 @@
 #    By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 16:57:12 by psoto-go          #+#    #+#              #
-#    Updated: 2022/02/28 18:24:30 by psoto-go         ###   ########.fr        #
+#    Updated: 2022/03/01 17:08:43 by psoto-go         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,14 @@ BONUS			=	srcs_bonus/main.c srcs_bonus/parser.c srcs_bonus/errors.c srcs_bonus/p
 					utils_bonus/ft_memcpy.c utils_bonus/ft_lstsize.c utils_bonus/ft_isalpha.c \
 					utils_bonus/get_next_line.c
 
-BONUS_OBJS		= $(BONUS:.c=.o)
+BONUS_OBJS		= 	srcs_bonus/main.o srcs_bonus/parser.o srcs_bonus/errors.o srcs_bonus/path.o \
+					srcs_bonus/comands.o srcs_bonus/utils_list.o srcs_bonus/corrects_paths.o  \
+					utils_bonus/ft_split.o utils_bonus/ft_strdup.o utils_bonus/ft_strjoin.o  \
+					utils_bonus/ft_strjoinlks.o utils_bonus/ft_strlen.o utils_bonus/ft_strncmp.o \
+					utils_bonus/ft_substr.o utils_bonus/ft_lstadd_back.o utils_bonus/ft_lstclear.o \
+					utils_bonus/ft_lstlast.o utils_bonus/ft_lstdelone.o utils_bonus/ft_lstiter.o \
+					utils_bonus/ft_memcpy.o utils_bonus/ft_lstsize.o utils_bonus/ft_isalpha.o \
+					utils_bonus/get_next_line.o
 
 CC				= gcc
 RM				= rm -rf
@@ -35,8 +42,6 @@ CFLAGS			= -Wall -Wextra -Werror
 CFLAGSANI		= -Wall -Wextra -Werror -fsanitize=address -g3
 MAKE			= make
 NAME			= pipex
-
-all:			$(NAME)
 
 $(NAME):		$(OBJS)
 				$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
@@ -52,10 +57,10 @@ fclean:			clean
 
 re:				fclean $(NAME)
 
-bonus:			$(BONUS_OBJS)
-				$(CC) $(CFLAGS) $(BONUS_OBJS) -o $(NAME)
+bonus: 			$(BONUS_OBJS)
+				@$(MAKE) OBJS="$(BONUS_OBJS)" all
 
 sanibonus:		$(BONUS_OBJS)
 				$(CC) $(CFLAGSANI) $(BONUS_OBJS) -o $(NAME)
 
-.PHONY:			all clean fclean re bonus sani
+.PHONY:			all clean fclean re bonus

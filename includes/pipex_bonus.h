@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:58:51 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/03/01 11:25:48 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/03/01 16:25:42 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ int		ft_isalpha(int c);
 
 char	*get_next_line(int fd);
 
-void	a(void);
+t_pipex	get_nodo(t_pipex *pipex, int i);
+
+void	do_backups(t_pipex *p);
 
 #endif

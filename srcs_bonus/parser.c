@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:48:37 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/03/01 10:58:46 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/03/01 16:23:34 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,35 @@ void	num_args(int argc, t_pipex *pipex)
 		ft_error(1, pipex);
 }
 
-void	check_file(char **argv, t_pipex *pipex, int argc)
+void	check_file(char **argv, t_pipex *p, int argc)
 {
-	pipex->fdstd[0] = open(argv[1], O_RDONLY);
-	if (pipex->fdstd[0] < 0)
+	p->fdstd[0] = open(argv[1], O_RDONLY);
+	if (p->fdstd[0] < 0)
 	{
 		if (errno == 2)
-			ft_error(2, pipex);
+			ft_error(2, p);
 		else
-			ft_error(3, pipex);
+			ft_error(3, p);
 	}
-	pipex->fdstd[1] = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	if (pipex->fdstd[1] < 0)
+	p->fdstd[1] = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0666);
+	if (p->fdstd[1] < 0)
 	{
 		if (errno == 2)
-			ft_error(2, pipex);
+			ft_error(2, p);
 		else
-			ft_error(3, pipex);
+			ft_error(3, p);
 	}
 }
 
-void	check_file_here_doc(char **argv, t_pipex *pipex, int argc)
+void	check_file_here_doc(char **argv, t_pipex *p, int argc)
 {
-	pipex->fdstd[1] = open(argv[argc - 1], O_CREAT | O_WRONLY | O_APPEND , 0666);
-	if (pipex->fdstd[1] < 0)
+	p->fdstd[1] = open(argv[argc - 1], O_CREAT | O_WRONLY | O_APPEND, 0666);
+	if (p->fdstd[1] < 0)
 	{
 		if (errno == 2)
-			ft_error(2, pipex);
+			ft_error(2, p);
 		else
-			ft_error(3, pipex);
+			ft_error(3, p);
 	}
 }
 
@@ -70,18 +70,17 @@ void	fill_stack(int argc, char **argv, t_pipex *p, int flag)
 
 void	parser(int argc, char **argv, t_pipex *pipex, char **envp)
 {
+	num_args(argc, pipex);
 	if (ft_strncmp(argv[1], "here_doc", 9) == 0)
 	{
-		num_args(argc, pipex);
 		check_file_here_doc(argv, pipex, argc);
 		get_path(envp, pipex, argv);
 		fill_stack(argc, argv, pipex, 1);
 	}
 	else
 	{
-		num_args(argc, pipex);
 		check_file(argv, pipex, argc);
 		get_path(envp, pipex, argv);
 		fill_stack(argc, argv, pipex, 0);
-	}
+	}	
 }

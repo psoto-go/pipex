@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/03/01 13:33:46 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/03/01 16:53:09 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,14 @@ void	ft_exit(t_pipex *pipex)
 		close(pipex->fd[WRITE_END]);
 	if (pipex->fd[READ_END])
 		close(pipex->fd[READ_END]);
+	if (pipex->fd[READ_END])
+		close(pipex->fdstd[READ_END]);
+	if (pipex->fd[WRITE_END])
+		close(pipex->fdstd[WRITE_END]);
 	// atexit(a);
-	while (1)
-	{
-		
-	}
+	// while (1)
+	// {
+	// }
 	exit(0);
 }
 
