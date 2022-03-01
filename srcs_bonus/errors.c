@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:41:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/28 20:33:14 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:33:46 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,11 @@ void	ft_exit(t_pipex *pipex)
 		free(pipex->path);
 	if (pipex->path_comand)
 		free(pipex->path_comand);
-	close(pipex->fd[WRITE_END]);
-	close(pipex->fd[READ_END]);
+	if (pipex->fd[WRITE_END])
+		close(pipex->fd[WRITE_END]);
+	if (pipex->fd[READ_END])
+		close(pipex->fd[READ_END]);
 	// atexit(a);
-	dup2(pipex->bcstd[0], STDIN_FILENO);
-	dup2(pipex->bcstd[1], STDOUT_FILENO);
-	close(pipex->bcstd[0]);
-	close(pipex->bcstd[1]);
 	while (1)
 	{
 		

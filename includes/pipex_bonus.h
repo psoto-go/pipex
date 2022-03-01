@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:58:51 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/02/28 18:29:26 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/03/01 11:25:48 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct pipex
 	char	**comand;
 	int		fd[2];
 	int		bcstd[2];
+	int		fdstd[2];
 	t_list	*list;
 }	t_pipex;
 
@@ -104,5 +105,7 @@ int		ft_lstsize(t_list *lst);
 int		ft_isalpha(int c);
 
 char	*get_next_line(int fd);
+
+void	a(void);
 
 #endif
