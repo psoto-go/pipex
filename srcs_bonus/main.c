@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/03/01 16:53:05 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/03/01 22:22:26 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	do_childs_here(t_pipex *pipex, char *argv)
 	if (pipe(pipex->fd) == -1)
 		ft_error(8, pipex);
 	pid = fork();
-	system("leaks pipex");
 	if (pid < 0)
 		ft_error(7, pipex);
 	if (pid > 0)
