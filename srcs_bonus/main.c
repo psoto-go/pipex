@@ -6,7 +6,7 @@
 /*   By: psoto-go <psoto-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:59:44 by psoto-go          #+#    #+#             */
-/*   Updated: 2022/03/01 22:22:26 by psoto-go         ###   ########.fr       */
+/*   Updated: 2022/03/02 10:48:27 by psoto-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,29 @@
 void	check_here_doc(t_pipex *pipex, char *argv)
 {
 	char	*line;
+	char	*limit;
 
+	limit = ft_strjoinlks(argv, "\n");
 	close(pipex->fd[READ_END]);
 	write(STDOUT_FILENO, "> ", 2);
 	line = get_next_line(STDIN_FILENO);
 	while (line)
 	{
-		if (ft_strncmp(argv, line, ft_strlen(argv)) == 0)
+		if (ft_strncmp(limit, line, ft_strlen(limit)) == 0)
 		{
 			close(pipex->fd[WRITE_END]);
 			free(line);
+			free(limit);
 			ft_error(0, pipex);
 		}
 		write(STDOUT_FILENO, "> ", 2);
-		write(pipex->fd[WRITE_END], line, ft_strlen(line) + 1);
+		write(pipex->fd[WRITE_END], line, ft_strlen(line));
 		free(line);
 		line = get_next_line(STDIN_FILENO);
 	}
 	close(pipex->fd[WRITE_END]);
 	free(line);
+	free(limit);
 }
 
 void	do_childs_here(t_pipex *pipex, char *argv)
